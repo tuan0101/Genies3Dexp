@@ -19,6 +19,8 @@ public class GridGenerator : MonoBehaviour
     GameObject square;
     WaitForSeconds timeToDisappear = new WaitForSeconds(2f);
 
+    public List<GameObject> Grid { get => grid; set => grid = value; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,10 +59,12 @@ public class GridGenerator : MonoBehaviour
             yield return timeToDisappear;
             int chosenSquare = Random.Range(0, grid.Count);
             StartCoroutine( FallingSquare(grid[chosenSquare].transform));
-            
+
             grid.RemoveAt(chosenSquare);
         }        
     }
+
+
 
     IEnumerator FallingSquare(Transform square)
     {
@@ -75,4 +79,6 @@ public class GridGenerator : MonoBehaviour
         }
         square.gameObject.SetActive(false);
     }
+
+
 }
