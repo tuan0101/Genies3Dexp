@@ -56,8 +56,23 @@ public class GridGenerator : MonoBehaviour
         {
             yield return timeToDisappear;
             int chosenSquare = Random.Range(0, grid.Count);
-            grid[chosenSquare].SetActive(false);
+            StartCoroutine( FallingSquare(grid[chosenSquare].transform));
+            
             grid.RemoveAt(chosenSquare);
         }        
+    }
+
+    IEnumerator FallingSquare(Transform square)
+    {
+        float time = 0;
+        float duration = 1;
+        Vector3 targetPosition = square.position - Vector3.up * 10;
+        while(time < duration)
+        {
+            square.position = Vector3.Lerp(square.position, targetPosition, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        square.gameObject.SetActive(false);
     }
 }
