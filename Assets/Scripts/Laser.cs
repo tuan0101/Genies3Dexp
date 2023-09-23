@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Lazer : MonoBehaviour
+public class Laser : MonoBehaviour
 {
     [SerializeField]
     GameObject[] projectile;
@@ -14,7 +14,7 @@ public class Lazer : MonoBehaviour
     Hovl_Laser LaserScript;
     float lazerDuration = 2f;
 
-
+    int index = 0;
     List<GameObject> grid;
     // Start is called before the first frame update
     void Start()
@@ -32,20 +32,23 @@ public class Lazer : MonoBehaviour
 
     public IEnumerator SpawnLaserCo(Transform firePoint)
     {
+        index++;
         //Destroy(Instance);
         // set fire Position on top of the chosen square
         Vector3 firePosition = firePoint.position + Vector3.up * 5;
 
-        int idx = Random.Range(0, 3);
-        
-        // ignite the lazer for 1 second
-        Instance = Instantiate(projectile[idx], firePosition, Quaternion.Euler(90,0 ,0));
 
+        // ignite the lazer for 1 second
+        //Instance = Instantiate(projectile[index % 3], firePosition, Quaternion.Euler(90,0 ,0));
+        Instance = projectile[index % 3];
+        Instance.SetActive(true);
+        Instance.transform.position = firePosition;
        // Instance.transform.parent = transform;
         LaserScript = Instance.GetComponent<Hovl_Laser>();
         yield return new WaitForSeconds(lazerDuration);
         if (LaserScript) LaserScript.DisablePrepare();
-        Destroy(Instance, 1);
+        //Destroy(Instance, 1);
+        Instance.SetActive(false);
     }
 
 
