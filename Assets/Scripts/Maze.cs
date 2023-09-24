@@ -18,22 +18,22 @@ public class Maze : MonoBehaviour
         InitializeMaze();
     }
 
-
     void InitializeMaze()
     {
-        for(int x=0; x<=Maze_SIZE; x+=2)
+        for(int x=1; x<=Maze_SIZE; x++)
         {
-
             // 75% to generate a block in every 2 rows
             int chance = Random.Range(1, 100);
-            if(chance <= 75)
+            if(chance <= 50)
             {
-                int z = Random.Range(0, Maze_SIZE/2)*2;  // multiple 2 to decrease the chance of overlaping blocks
-                Vector3 randomPosition = new Vector3(x, 2, z);
+                // even x and odd z for horizontal blocks
+                int z = Random.Range(0, Maze_SIZE/2)*2+1;  // multiple 2 to decrease the chance of overlaping blocks
+                Vector3 randomPosition = new Vector3(x/2*2, 1.5f, z);
                 Instantiate(horBlock, randomPosition, horBlock.transform.rotation);
 
-                z = Random.Range(0, Maze_SIZE + 1);
-                randomPosition = new Vector3(x, 2, z);
+                // even z and odd x for vertical blocks
+                z = Random.Range(0, Maze_SIZE / 2) * 2;
+                randomPosition = new Vector3(x/2*2+1, 1.5f, z);
                 Instantiate(verBlock, randomPosition, verBlock.transform.rotation);
             }
         }
