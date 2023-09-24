@@ -277,6 +277,10 @@ namespace StarterAssets
                 _animator.SetFloat(_animIDSpeed, _animationBlend);
                 _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
             }
+
+            if (Input.GetKeyDown(KeyCode.H)){
+                _animator.SetTrigger("GetHit");
+            }
         }
 
         private void JumpAndGravity()

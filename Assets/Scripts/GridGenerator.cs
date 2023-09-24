@@ -25,7 +25,7 @@ public class GridGenerator : MonoBehaviour
     void Start()
     {
         InitializeGrids();
-        StartCoroutine(DisableSquare());
+        //StartCoroutine(DisableSquare());
     }
 
 

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Hologram2
+  m_Name: MazeHologram
   m_Shader: {fileID: -6465566751694194690, guid: 6238d0d211a363645805f084d5414d45, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
