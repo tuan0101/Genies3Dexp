@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GridGenerator : MonoBehaviour
-{
-    const int GRID_SIZE = 5;
+{   
     const int SQUARE_SIZE = 2;
+    int grid_size = 5;
 
     [SerializeField]
     GameObject square1;
@@ -19,11 +19,17 @@ public class GridGenerator : MonoBehaviour
     GameObject square;
     WaitForSeconds timeToDisappear = new WaitForSeconds(2f);
 
+    #region Public Getters and Setters
     public List<GameObject> Grid { get => grid; set => grid = value; }
+
+    public int Grid_Size { get => grid_size; set => grid_size = value; }
+    #endregion
 
     // Start is called before the first frame update
     void Start()
     {
+        grid_size = StaticVariables.grid_size;
+        InitializeGridList();
         InitializeGrids();
         //StartCoroutine(DisableSquare());
     }
@@ -33,10 +39,10 @@ public class GridGenerator : MonoBehaviour
     {
         int count = 0;
         int x = 0, z;
-        for (int i = 0; i < GRID_SIZE; i++)
+        for (int i = 0; i < grid_size; i++)
         {
             z = 0;
-            for (int j = 0; j < GRID_SIZE; j++)
+            for (int j = 0; j < grid_size; j++)
             {
                 if (i % 2 == 0)
                     square = j % 2 == 0 ? square1 : square2;
@@ -64,8 +70,6 @@ public class GridGenerator : MonoBehaviour
         }        
     }
 
-
-
     IEnumerator FallingSquare(Transform square)
     {
         float time = 0;
@@ -80,5 +84,12 @@ public class GridGenerator : MonoBehaviour
         square.gameObject.SetActive(false);
     }
 
-
+    void InitializeGridList()
+    {
+        GameObject empty = new GameObject();
+        for(int i=0; i<grid_size*grid_size; i++)
+        {
+            grid.Add(empty);
+        }
+    }
 }

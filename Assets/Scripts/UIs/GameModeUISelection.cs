@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class GameModeUISelection : MonoBehaviour
 {
-    Toggle mazeToggle;
-    Toggle laserToggle;
+    [SerializeField] Toggle mazeToggle;
+    [SerializeField] Toggle laserToggle;
 
     private void Start()
     {
