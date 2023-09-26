@@ -12,8 +12,16 @@ public class GridSizeUISelection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        InitializeValues();
+
         increaseBtn.onClick.AddListener(OnIncrease);
         decreaseBtn.onClick.AddListener(OnDecrease);
+    }
+
+    //from previous gameplay section
+    void InitializeValues()
+    {
+        gridSize.text = StaticVariables.grid_size.ToString();
     }
 
     void OnIncrease()

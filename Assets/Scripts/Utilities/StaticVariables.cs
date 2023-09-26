@@ -8,4 +8,5 @@ public class StaticVariables
     public static int grid_size = 5;
     public static bool maze_mode = true;
     public static bool laser_mode = false;
+    public static bool is_easy_mode = false;
 }

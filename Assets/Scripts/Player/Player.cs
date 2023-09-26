@@ -2,30 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Singleton<Player>
+public class Player : MonoBehaviour
 {
     [Header("Player Grounded")]
-    [SerializeField]
-    GameObject mainBody;
-    [SerializeField]
-    Material originalMat;
-    [SerializeField]
-    Material glowMat;
+    [SerializeField] GameObject mainBody;
+    [SerializeField] Material originalMat;
+    [SerializeField] Material glowMat;
+    [SerializeField] AudioClip getShock;
 
-    //[SerializeField]
-    public AudioClip getShock;
-
-
+    Vector3 startPosition = new Vector3(4, 1, 4);
     Animator anim;
 
     bool isGetHit = false;
     bool hasAnimator;
-
-    protected override void Awake()
-    {
-
-        base.Awake();
-    }
 
     void Start()
     {
@@ -37,7 +26,6 @@ public class Player : Singleton<Player>
         if (hasAnimator)
         {
             anim.SetTrigger("GetHit");
-            Debug.Log("GetHit");
         }
         StartCoroutine( FreezePlayer());
         StartCoroutine(GetHitEffect(laser));
@@ -72,6 +60,11 @@ public class Player : Singleton<Player>
             yield return new WaitForSeconds(flashDuration);
         }
         laser.EnablePlayerGetHit();
+    }
+
+    public void PlayVictoryAnim()
+    {
+        anim.SetBool("Victory", true);
     }
 
     private void GetHit(AnimationEvent animationEvent)

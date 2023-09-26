@@ -4,23 +4,22 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour
 {
-    [SerializeField]
-    GameObject[] lasers;
+    [SerializeField] GameObject[] lasers;
 
-    [SerializeField]
-    GridGenerator gridG;
+    [SerializeField] GridGenerator gridGenerator;
 
-    [SerializeField]
-    Material flashMaterial;
+    [SerializeField] Material flashMaterial;
 
     int index = 0;
     List<GameObject> grid;
-
+    GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
-        grid = gridG.Grid;
+        gameManager = GameObject.Find("/GameManager").GetComponent<GameManager>();
+        grid = gridGenerator.Grid;
         StartCoroutine(FireTripleLasersCo());
+
     }
 
     IEnumerator FireLaserCo()
@@ -29,7 +28,7 @@ public class Laser : MonoBehaviour
         Transform firePoint = grid[chosenSquare].transform;
 
         // flash 1s before firing
-        StartCoroutine(FlashingSquare(grid[chosenSquare]));
+        FlashingSquare(grid[chosenSquare]);
         yield return new WaitForSeconds(1);
         StartCoroutine(SpawnLaserCo(firePoint));
     }
@@ -79,19 +78,9 @@ public class Laser : MonoBehaviour
     }
 
     // Indicating the square is being fired by a lazer
-    IEnumerator FlashingSquare(GameObject chosenSquare)
+    void FlashingSquare(GameObject chosenSquare)
     {
-        float flashDuration = 0.25f;
-        Renderer renderer;
-        renderer = chosenSquare.GetComponent<Renderer>();
         Color color = new Color(.5f, .2f, .2f);
-
-        for (int i = 0; i < 3; i++)
-        {
-            renderer.material.SetColor("_EmissionColor", color);
-            yield return new WaitForSeconds(flashDuration);
-            renderer.material.SetColor("_EmissionColor", Color.black);
-            yield return new WaitForSeconds(flashDuration);
-        }
+        StartCoroutine( gameManager.FlashingSquare(chosenSquare, color));
     }
 }
