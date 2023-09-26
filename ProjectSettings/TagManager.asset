@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CinemachineTarget
   - Laser
+  - Defeat
   layers:
   - Default
   - TransparentFX

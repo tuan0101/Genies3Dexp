@@ -10,14 +10,15 @@ public class Player : MonoBehaviour
     [SerializeField] Material glowMat;
     [SerializeField] AudioClip getShock;
 
-    Vector3 startPosition = new Vector3(4, 1, 4);
     Animator anim;
+    GameManager gameManager;
 
     bool isGetHit = false;
     bool hasAnimator;
 
     void Start()
     {
+        gameManager = GameObject.Find("/GameManager").GetComponent<GameManager>();
         hasAnimator = TryGetComponent(out anim);
     }
 
@@ -67,6 +68,20 @@ public class Player : MonoBehaviour
         anim.SetBool("Victory", true);
     }
 
+    public void PlayDefeatAnim()
+    {
+        anim.SetBool("Defeat", true);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Defeat")
+        {
+            gameManager.Defeat();
+            Debug.Log("defeat");
+        }
+    }
+    // sound
     private void GetHit(AnimationEvent animationEvent)
     {
         AudioSource.PlayClipAtPoint(getShock, this.transform.position, 1f);
