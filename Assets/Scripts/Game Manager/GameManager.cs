@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
     [SerializeField] GameObject maze;
     [SerializeField] GameObject laser;
     [SerializeField] GridGenerator gridGenerator;
     [SerializeField] EndGameUI endGameUI;
     [SerializeField] GameObject UIcanvas;
-    [SerializeField] Player player;
 
     public List<GameObject> grid;
     WaitForSeconds timeToDisappear = new WaitForSeconds(2f);
@@ -19,6 +18,10 @@ public class GameManager : MonoBehaviour
     public bool IsEasyMode { get => isEasyMode; set => isEasyMode = value; }
     #endregion
 
+    protected override void Awake() 
+    {
+        base.Awake(); 
+    }
 
     private void Start()
     {
@@ -105,13 +108,13 @@ public class GameManager : MonoBehaviour
     {
         UIcanvas.SetActive(true);
         endGameUI.Victory();
-        player.PlayVictoryAnim();
+        Player.Instance.PlayVictoryAnim();
     }
 
     public void Defeat()
     {
         UIcanvas.SetActive(true);
         endGameUI.Defeat();
-        player.PlayDefeatAnim();
+        Player.Instance.PlayDefeatAnim();
     }
 }

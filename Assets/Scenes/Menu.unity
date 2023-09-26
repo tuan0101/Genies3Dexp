@@ -1530,11 +1530,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7550223790324922405, guid: a6729faa6b0c5bb47b7157d2de4eff34, type: 3}
       propertyPath: m_FontData.m_MinSize
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7550223790324922405, guid: a6729faa6b0c5bb47b7157d2de4eff34, type: 3}
       propertyPath: m_FontData.m_FontSize
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 7550223790324922405, guid: a6729faa6b0c5bb47b7157d2de4eff34, type: 3}
       propertyPath: m_FontData.m_FontStyle

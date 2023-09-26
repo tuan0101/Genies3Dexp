@@ -12,11 +12,10 @@ public class Laser : MonoBehaviour
 
     int index = 0;
     List<GameObject> grid;
-    GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = GameObject.Find("/GameManager").GetComponent<GameManager>();
         grid = gridGenerator.Grid;
         StartCoroutine(FireTripleLasersCo());
 
@@ -81,6 +80,6 @@ public class Laser : MonoBehaviour
     void FlashingSquare(GameObject chosenSquare)
     {
         Color color = new Color(.5f, .2f, .2f);
-        StartCoroutine( gameManager.FlashingSquare(chosenSquare, color));
+        StartCoroutine( GameManager.Instance.FlashingSquare(chosenSquare, color));
     }
 }

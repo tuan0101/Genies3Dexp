@@ -18,8 +18,8 @@ public abstract class Singleton<T> : MonoBehaviour where T : Component
         if (instance == null)
         {
             instance = GetComponent<T>();
-            if (isPersistent)
-                DontDestroyOnLoad(gameObject);
+            //if (isPersistent)
+            //    DontDestroyOnLoad(gameObject);
         }
         else
             Destroy(gameObject);

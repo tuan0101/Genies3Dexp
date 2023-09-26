@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Singleton<Player>
 {
     [Header("Player Grounded")]
     [SerializeField] GameObject mainBody;
@@ -11,14 +11,16 @@ public class Player : MonoBehaviour
     [SerializeField] AudioClip getShock;
 
     Animator anim;
-    GameManager gameManager;
 
-    bool isGetHit = false;
     bool hasAnimator;
+
+    protected override void Awake()
+    {
+        base.Awake();
+    }
 
     void Start()
     {
-        gameManager = GameObject.Find("/GameManager").GetComponent<GameManager>();
         hasAnimator = TryGetComponent(out anim);
     }
 
@@ -77,8 +79,7 @@ public class Player : MonoBehaviour
     {
         if(other.gameObject.tag == "Defeat")
         {
-            gameManager.Defeat();
-            Debug.Log("defeat");
+            GameManager.Instance.Defeat();
         }
     }
     // sound
