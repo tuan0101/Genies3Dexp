@@ -23,7 +23,7 @@ public class Maze : MonoBehaviour
     {
         for(int x=1; x<=maze_size; x++)
         {
-            // 75% to generate a block in every 2 rows
+            // 50% to generate a block in every 2 rows
             int chance = Random.Range(1, 100);
             if(chance <= 50)
             {
@@ -33,20 +33,27 @@ public class Maze : MonoBehaviour
                 GameObject gameObj =  Instantiate(horBlock, randomPosition, horBlock.transform.rotation, this.transform);
 
                 // to add animation for this block
-                if (gameObj.TryGetComponent(out DynamicBlock hBlock))
-                {
-                    hBlock.UpdateTargetPosition(false) ;
+                if (StaticVariables.is_dynamic_maze)
+                {                   
+                    if (gameObj.TryGetComponent(out DynamicBlock hBlock))
+                    {
+                        hBlock.UpdateTargetPosition(false);
+                    }
                 }
 
                 // even z and odd x for vertical blocks
                 z = Random.Range(0, maze_size / 2) * 2;
                 randomPosition = new Vector3(x/2*2+1, 1.5f, z);
                 gameObj = Instantiate(verBlock, randomPosition, verBlock.transform.rotation, this.transform);
+
                 // to add animation for this block
-                if (gameObj.TryGetComponent(out DynamicBlock vBlock))
-                {
-                    vBlock.UpdateTargetPosition(true);
-                }
+                if (StaticVariables.is_dynamic_maze)
+                {                   
+                    if (gameObj.TryGetComponent(out DynamicBlock vBlock))
+                    {
+                        vBlock.UpdateTargetPosition(true);
+                    }
+                }                   
             }
         }
     }

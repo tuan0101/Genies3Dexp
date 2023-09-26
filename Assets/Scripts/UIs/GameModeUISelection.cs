@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GameModeUISelection : MonoBehaviour
 {
     [SerializeField] Toggle mazeToggle;
+    [SerializeField] Toggle dynamicToggle;
     [SerializeField] Toggle laserToggle;
     [SerializeField] Toggle easyToggle;
 
@@ -14,6 +15,7 @@ public class GameModeUISelection : MonoBehaviour
         InitializeValues();
 
         mazeToggle.onValueChanged.AddListener(delegate { OnMazeToggle(); });
+        dynamicToggle.onValueChanged.AddListener(delegate { OnDynamicToggle(); });
         laserToggle.onValueChanged.AddListener(delegate { OnLaserToggle(); });
         easyToggle.onValueChanged.AddListener(delegate { OnEasyToggle(); });
 
@@ -23,6 +25,7 @@ public class GameModeUISelection : MonoBehaviour
     void InitializeValues()
     {
         mazeToggle.isOn = StaticVariables.maze_mode;
+        dynamicToggle.isOn = StaticVariables.is_dynamic_maze;
         laserToggle.isOn = StaticVariables.laser_mode;
         easyToggle.isOn = StaticVariables.is_easy_mode;
     }
@@ -30,6 +33,11 @@ public class GameModeUISelection : MonoBehaviour
     void OnMazeToggle()
     {
         StaticVariables.maze_mode = mazeToggle.isOn ? true : false;
+    }
+
+    void OnDynamicToggle()
+    {
+        StaticVariables.is_dynamic_maze = dynamicToggle.isOn ? true : false;
     }
 
     void OnLaserToggle()
