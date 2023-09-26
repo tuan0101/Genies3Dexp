@@ -15,7 +15,7 @@ public class Maze : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        maze_size = StaticVariables.grid_size * 2 - 1;
+        maze_size = StaticVariables.grid_size * StaticVariables.square_size - 1;
         InitializeMaze();
     }
 
@@ -30,13 +30,26 @@ public class Maze : MonoBehaviour
                 // even x and odd z for horizontal blocks
                 int z = Random.Range(0, maze_size/2)*2+1;  // multiple 2 to decrease the chance of overlaping blocks
                 Vector3 randomPosition = new Vector3(x/2*2, 1.5f, z);
-                Instantiate(horBlock, randomPosition, horBlock.transform.rotation, this.transform);
+                GameObject gameObj =  Instantiate(horBlock, randomPosition, horBlock.transform.rotation, this.transform);
+
+                // to add animation for this block
+                if (gameObj.TryGetComponent(out DynamicBlock hBlock))
+                {
+                    hBlock.UpdateTargetPosition(false) ;
+                }
 
                 // even z and odd x for vertical blocks
                 z = Random.Range(0, maze_size / 2) * 2;
                 randomPosition = new Vector3(x/2*2+1, 1.5f, z);
-                Instantiate(verBlock, randomPosition, verBlock.transform.rotation);
+                gameObj = Instantiate(verBlock, randomPosition, verBlock.transform.rotation, this.transform);
+                // to add animation for this block
+                if (gameObj.TryGetComponent(out DynamicBlock vBlock))
+                {
+                    vBlock.UpdateTargetPosition(true);
+                }
             }
         }
     }
+
+
 }

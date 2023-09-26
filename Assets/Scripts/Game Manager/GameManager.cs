@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject laser;
     [SerializeField] GridGenerator gridGenerator;
     [SerializeField] EndGameUI endGameUI;
+    [SerializeField] GameObject UIcanvas;
     [SerializeField] Player player;
 
     public List<GameObject> grid;
@@ -102,13 +103,15 @@ public class GameManager : MonoBehaviour
     }
     public void Victory()
     {
+        UIcanvas.SetActive(true);
         endGameUI.Victory();
         player.PlayVictoryAnim();
     }
 
     public void Defeat()
     {
+        UIcanvas.SetActive(true);
         endGameUI.Defeat();
-
+        player.PlayDefeatAnim();
     }
 }
